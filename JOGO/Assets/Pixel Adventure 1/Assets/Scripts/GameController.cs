@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
 
     public int totalScore;
     public Text scoreText;
+
+    public GameObject gameOver;
+
+    public GameObject youWin;
 
     public static GameController instance;
 
@@ -21,4 +26,26 @@ public class GameController : MonoBehaviour
     {
         scoreText.text = totalScore.ToString();
     }
+
+    public void ShowGameOver()
+    {
+        gameOver.SetActive(true);
+    }
+
+    public void RestartGame(string lvlName)
+    {
+        SceneManager.LoadScene(lvlName);
+    }
+
+    public void ShowYouWin()
+    {
+        youWin.SetActive(true);
+    }
+
+    public void LoadScene(string lvlName)
+    {
+        SceneManager.LoadScene(lvlName);
+    }
+
+    
 }
