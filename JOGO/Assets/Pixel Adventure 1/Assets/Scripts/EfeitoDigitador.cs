@@ -23,17 +23,23 @@ public class EfeitoDigitador : MonoBehaviour
 
   private void OnEnable()
   {
-
+    ImprimirMensagem(mensagemOriginal);
   }
 
   private void OnDisable()
   {
     componenteTexto.text = mensagemOriginal;
+    StopAllCoroutines();
   }
 
   public void ImprimirMensagem(string mensagem)
   {
-
+    if (gameObject.activeInHierarchy)
+    {
+      if(imprimindo) return;
+      imprimindo = true;
+      StartCoroutine(LetraPorLetra(mensagem));
+    }
   }
 
   IEnumerator LetraPorLetra(string mensagem)
@@ -46,6 +52,8 @@ public class EfeitoDigitador : MonoBehaviour
       _audioSource.Play();
       yield return new WaitForSeconds(tempoEntreLetras);
     }
-    
+     
+     imprimindo = false;
+     StopAllCoroutines();
   }
 }
